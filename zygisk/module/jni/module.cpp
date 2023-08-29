@@ -84,13 +84,13 @@ private:
     }
 
     void preSpecialize(const std::string& process) {
-        // Only touch GMS
-        if (process.rfind("com.google.android.gms", 0) != 0) {
+        // Only touch GMS unstable process
+        if (process == "com.google.android.gms.unstable") {
             api->setOption(zygisk::DLCLOSE_MODULE_LIBRARY);
             return;
         }
 
-        // Force DenyList unmounting for all GMS processes
+        // Force DenyList unmounting for GMS unstable process
         api->setOption(zygisk::FORCE_DENYLIST_UNMOUNT);
 
         // The unstable process is where SafetyNet attestation actually runs, so we only need to
